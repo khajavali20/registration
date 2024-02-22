@@ -1,0 +1,42 @@
+{
+  "request": {
+    "path": "/api/hospitals/register",
+    "method": "post",
+    "body": {
+      "fullName": "syed khajavali",
+      "centerName": "ABC Hospital",
+      "helplineNumber": "04439890000",
+      "mobileNumber": "9398997768",
+      "email": "sayyed.khajavali1234@gmail.com",
+      "password": "Test@123",
+      "confirmPassword": "Test@123",
+      "address": {
+        "line1": "narasaraopeta",
+        "line2": "challagundla",
+        "village": "nakarikallu",
+        "city": "guntur",
+        "state": "Andhra pradesh",
+        "pinCode": "522601"
+      },
+      "gps": [12.45465, 72.5566],
+      "description": "testing",
+      "defaultAvailability": [
+        {
+          "open": "9:30",
+          "close": "18:00",
+          "price": 1000,
+          "appointment": 10
+        }
+      ],
+      "profilePicture": "65892db0859a6470b9456ea7.jpg",
+      "centerImages": "65892db0859a6470b9456ea7.jpg",
+      "proofs": "65892db0859a6470b9456ea7.jpg",
+      "hospitalServices": ["65892508a1f486e1b3716ad1"]
+    }
+  },
+  "response": {
+    "status": 200,
+    "delay": 2000,
+    "id": "614c9b5d8f6a3e7b4d6d7d9a"
+  }
+}
