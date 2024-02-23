@@ -455,6 +455,13 @@ export default function SignUpPage() {
             </div>
             {/* defaultAvailability */}
 
+            <div className="form-control">
+              <input
+                type="time"
+                className="input input-bordered w-full placeholder-white"
+              />
+            </div>
+
             {/* hospitalServices */}
           </div>
         </form>
