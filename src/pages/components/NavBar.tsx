@@ -9,7 +9,7 @@ export const NavBar = () => {
           >
             <img src="/src/assets/9391703.png" className="h-8" alt="LHE Logo" />
             <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-              LHE
+              LHE Hospital
             </span>
           </a>
           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">

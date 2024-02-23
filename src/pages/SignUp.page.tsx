@@ -79,7 +79,7 @@ export default function SignUpPage() {
 
   return (
     <div className="grid grid-cols-1 gap-y-4 pt-28">
-      <div className="card card-bordered card-normal shadow-md bg-white mx-[40%] gap-y-3">
+      <div className="card card-bordered card-normal shadow-md bg-white mx-[35%] gap-y-3">
         <div>{<NavBar />}</div>
         <form
           className="card-body"
@@ -242,89 +242,90 @@ export default function SignUpPage() {
                 id="line2"
               />
             </div>
+            <div className="grid grid-cols-2 gap-3">
+              <div className="form-control mt-3">
+                {/* Address Village */}
+                <input
+                  type="text"
+                  className={`input input-bordered w-full placeholder-white  ${
+                    registerForm.formState.errors.address?.village
+                      ? "input-error"
+                      : ""
+                  }`}
+                  {...registerForm.register("address.village", {
+                    required: true,
+                  })}
+                  placeholder="Village"
+                  id="village"
+                />
+                {registerForm.formState.errors.address?.village?.type ===
+                  "required" && (
+                  <small className="text-error">Village is required</small>
+                )}
+              </div>
 
-            <div className="form-control mt-3">
-              {/* Address Village */}
-              <input
-                type="text"
-                className={`input input-bordered w-full placeholder-white  ${
-                  registerForm.formState.errors.address?.village
-                    ? "input-error"
-                    : ""
-                }`}
-                {...registerForm.register("address.village", {
-                  required: true,
-                })}
-                placeholder="Village"
-                id="village"
-              />
-              {registerForm.formState.errors.address?.village?.type ===
-                "required" && (
-                <small className="text-error">Village is required</small>
-              )}
-            </div>
+              <div className="form-control mt-3">
+                {/* Address city */}
+                <input
+                  type="text"
+                  className={`input input-bordered w-full placeholder-white  ${
+                    registerForm.formState.errors.address?.city
+                      ? "input-error"
+                      : ""
+                  }`}
+                  {...registerForm.register("address.city", {
+                    required: true,
+                  })}
+                  placeholder="City"
+                  id="city"
+                />
+                {registerForm.formState.errors.address?.city?.type ===
+                  "required" && (
+                  <small className="text-error">city is required</small>
+                )}
+              </div>
 
-            <div className="form-control mt-3">
-              {/* Address city */}
-              <input
-                type="text"
-                className={`input input-bordered w-full placeholder-white  ${
-                  registerForm.formState.errors.address?.city
-                    ? "input-error"
-                    : ""
-                }`}
-                {...registerForm.register("address.city", {
-                  required: true,
-                })}
-                placeholder="City"
-                id="city"
-              />
-              {registerForm.formState.errors.address?.city?.type ===
-                "required" && (
-                <small className="text-error">city is required</small>
-              )}
-            </div>
+              <div className="form-control mt-3">
+                {/* Address State */}
+                <input
+                  type="text"
+                  className={`input input-bordered w-full placeholder-white  ${
+                    registerForm.formState.errors.address?.state
+                      ? "input-error"
+                      : ""
+                  }`}
+                  {...registerForm.register("address.state", {
+                    required: true,
+                  })}
+                  placeholder="State"
+                  id="state"
+                />
+                {registerForm.formState.errors.address?.state?.type ===
+                  "required" && (
+                  <small className="text-error">State is required</small>
+                )}
+              </div>
 
-            <div className="form-control mt-3">
-              {/* Address State */}
-              <input
-                type="text"
-                className={`input input-bordered w-full placeholder-white  ${
-                  registerForm.formState.errors.address?.state
-                    ? "input-error"
-                    : ""
-                }`}
-                {...registerForm.register("address.state", {
-                  required: true,
-                })}
-                placeholder="State"
-                id="state"
-              />
-              {registerForm.formState.errors.address?.state?.type ===
-                "required" && (
-                <small className="text-error">State is required</small>
-              )}
-            </div>
-
-            <div className="form-control mt-3">
-              {/* Address PinCode */}
-              <input
-                type="text"
-                className={`input input-bordered w-full placeholder-white  ${
-                  registerForm.formState.errors.address?.pinCode
-                    ? "input-error"
-                    : ""
-                }`}
-                {...registerForm.register("address.pinCode", {
-                  required: true,
-                })}
-                placeholder="PinCode"
-                id="pinCode"
-              />
-              {registerForm.formState.errors.address?.pinCode?.type ===
-                "required" && (
-                <small className="text-error">Pin code is required</small>
-              )}
+              <div className="form-control mt-3">
+                {/* Address PinCode */}
+                <input
+                  type="text"
+                  className={`input input-bordered w-full placeholder-white  ${
+                    registerForm.formState.errors.address?.pinCode
+                      ? "input-error"
+                      : ""
+                  }`}
+                  {...registerForm.register("address.pinCode", {
+                    required: true,
+                  })}
+                  placeholder="PinCode"
+                  id="pinCode"
+                />
+                {registerForm.formState.errors.address?.pinCode?.type ===
+                  "required" && (
+                  <small className="text-error">Pin code is required</small>
+                )}
+              </div>
             </div>
 
             <div className="form-control mt-3">
@@ -380,11 +381,123 @@ export default function SignUpPage() {
               /> */}
             </div>
 
+            {/* defaultAvailability Open */}
+            <div className="grid grid-cols-2 gap-3 ">
+              <div className="form-control mt-3">
+                {/* <label htmlFor="availabilityOpen">Availability Open*</label> */}
+                <input
+                  type="text"
+                  id="availabilityOpen"
+                  placeholder="Availability Open"
+                  className={`input input-bordered w-full placeholder-white ${
+                    registerForm.formState.errors.defaultAvailability?.open
+                      ? "input-error"
+                      : ""
+                  }`}
+                  {...registerForm.register("defaultAvailability.open", {
+                    required: "Availability Open is required",
+                  })}
+                />
+                {registerForm.formState.errors.defaultAvailability?.open && (
+                  <small className="text-error">
+                    {
+                      registerForm.formState.errors.defaultAvailability.open
+                        .message
+                    }
+                  </small>
+                )}
+              </div>
+              {/* defaultAvailability Close */}
+              <div className="form-control mt-3">
+                {/* <label htmlFor="availabilityClose">Availability Close*</label> */}
+                <input
+                  type="text"
+                  id="availabilityClose"
+                  placeholder="Availability close"
+                  className={`input input-bordered w-full placeholder-white ${
+                    registerForm.formState.errors.defaultAvailability?.close
+                      ? "input-error"
+                      : ""
+                  }`}
+                  {...registerForm.register("defaultAvailability.close", {
+                    required: "Availability Close is required",
+                  })}
+                />
+                {registerForm.formState.errors.defaultAvailability?.close && (
+                  <small className="text-error">
+                    {
+                      registerForm.formState.errors.defaultAvailability.close
+                        .message
+                    }
+                  </small>
+                )}
+              </div>
+
+              {/* Default Availability Price */}
+              <div className="form-control mt-3">
+                {/* <label htmlFor="availabilityClose">Availability Close*</label> */}
+                <input
+                  type="text"
+                  id="availabilityPrice"
+                  placeholder="Availability Price"
+                  className={`input input-bordered w-full placeholder-white ${
+                    registerForm.formState.errors.defaultAvailability?.price
+                      ? "input-error"
+                      : ""
+                  }`}
+                  {...registerForm.register("defaultAvailability.price", {
+                    required: "Availability price is required",
+                  })}
+                />
+                {registerForm.formState.errors.defaultAvailability?.price && (
+                  <small className="text-error">
+                    {
+                      registerForm.formState.errors.defaultAvailability.price
+                        .message
+                    }
+                  </small>
+                )}
+              </div>
+
+              {/* Default Availability Appointment */}
+              <div className="form-control mt-3">
+                {/* <label htmlFor="availabilityClose">Availability Close*</label> */}
+                <input
+                  type="text"
+                  id="availabilityAppointment"
+                  placeholder="Availability Appointment"
+                  className={`input input-bordered w-full placeholder-white ${
+                    registerForm.formState.errors.defaultAvailability
+                      ?.appointments
+                      ? "input-error"
+                      : ""
+                  }`}
+                  {...registerForm.register(
+                    "defaultAvailability.appointments",
+                    {
+                      required: "Availability appointments is required",
+                    }
+                  )}
+                />
+                {registerForm.formState.errors.defaultAvailability
+                  ?.appointments && (
+                  <small className="text-error">
+                    {
+                      registerForm.formState.errors.defaultAvailability
+                        .appointments.message
+                    }
+                  </small>
+                )}
+              </div>
+            </div>
+            {/* hospitalServices */}
+
+            {/* Profile Picture */}
             <div className="form-control mt-3">
-              {/* Profile Picture */}
+              <label htmlFor="profile">ProfilePicture*</label>
               <input
                 type="file"
-                id="image"
+                id="profile"
                 className={`file-input file-input-bordered w-full placeholder-white  ${
                   registerForm.formState.errors.profilePicture
                     ? "file-input-error"
@@ -403,9 +516,10 @@ export default function SignUpPage() {
             </div>
             {/* Center Images */}
             <div className="form-control mt-3">
+              <label htmlFor="centerImage">Center Images*</label>
               <input
                 type="file"
-                id="image"
+                id="centerImage"
                 className={`file-input file-input-bordered w-full placeholder-white  ${
                   registerForm.formState.errors.centerImages
                     ? "file-input-error"
@@ -422,9 +536,10 @@ export default function SignUpPage() {
             </div>
             {/* proofs */}
             <div className="form-control mt-3">
+              <label htmlFor="proofs">Proofs*</label>
               <input
                 type="file"
-                id="image"
+                id="proofs"
                 className={`file-input file-input-bordered w-full placeholder-white  ${
                   registerForm.formState.errors.proofs ? "file-input-error" : ""
                 }`}
@@ -436,6 +551,7 @@ export default function SignUpPage() {
                 <small className="text-error">Proofs is required</small>
               )}
             </div>
+
             {/* description */}
             <div className="form-control mt-3">
               <textarea
@@ -444,7 +560,7 @@ export default function SignUpPage() {
                 placeholder="Enter description"
                 id="description"
                 {...registerForm.register("description", {
-                  required: "Descriptin is required",
+                  required: "Description is required",
                 })}
               ></textarea>
               {registerForm.formState.errors.description && (
@@ -453,16 +569,6 @@ export default function SignUpPage() {
                 </small>
               )}
             </div>
-            {/* defaultAvailability */}
-
-            <div className="form-control">
-              <input
-                type="time"
-                className="input input-bordered w-full placeholder-white"
-              />
-            </div>
-
-            {/* hospitalServices */}
           </div>
         </form>
       </div>
