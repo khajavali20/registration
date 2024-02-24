@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Availability } from "./components/DefaultAvailability.types";
 // import { GPS } from "./components/Gps.types";
 import { NavBar } from "./components/NavBar";
@@ -62,6 +63,44 @@ export default function SignUpPage() {
   //   control: registerForm.control,
   //   name: gps[]
   // });
+
+  const [items, setItem] = useState(false);
+  const [selectItem, setSelectItem] = useState<string[]>([]);
+  const options = [
+    "Ent",
+    "General Physician",
+    "Pediatrician",
+    "Radiology",
+    "Ophthalmology",
+    "Orthopedics",
+    "Gynecology",
+    "Cardiology",
+    "Emergency",
+    "Dental",
+    "Neurology",
+    "Psychiatrist",
+    "Dermatology",
+    "Pulmnologist",
+    "Urologist",
+    "General Surgeon",
+    "Phsiotheraphy",
+    "Plastic Surgeon",
+    "Optometrist",
+    "Gastroenterology",
+    "Other",
+  ];
+
+  const dropdown = () => {
+    setItem(!items);
+  };
+
+  const selectingItem = (item: string) => {
+    if (selectItem.includes(item)) {
+      setSelectItem(selectItem.filter((selected) => selected !== item));
+    } else {
+      setSelectItem([...selectItem, item]);
+    }
+  };
 
   const signUp = useMutation({
     mutationKey: ["register"],
@@ -491,6 +530,22 @@ export default function SignUpPage() {
               </div>
             </div>
             {/* hospitalServices */}
+            <div className="form-control mt-3">
+              <div className="dropdown dropdown-hover w-full">
+                <div onClick={dropdown} className="btn m-1 w-full">
+                  {selectItem}
+                </div>
+                {items && (
+                  <ul className="dropdown-content z-10 menu p-2 shadow bg-base-100 rounded-box w-full">
+                    {options.map((option) => (
+                      <li key={option}>
+                        <a onClick={() => selectingItem(option)}>{option}</a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </div>
 
             {/* Profile Picture */}
             <div className="form-control mt-3">
