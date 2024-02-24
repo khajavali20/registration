@@ -66,6 +66,7 @@ export default function SignUpPage() {
 
   const [items, setItem] = useState(false);
   const [selectItem, setSelectItem] = useState<string[]>([]);
+  const [error, setError] = useState("");
   const options = [
     "Ent",
     "General Physician",
@@ -99,6 +100,12 @@ export default function SignUpPage() {
       setSelectItem(selectItem.filter((selected) => selected !== item));
     } else {
       setSelectItem([...selectItem, item]);
+    }
+  };
+
+  const handleSubmit = () => {
+    if (selectItem.length === 0) {
+      setError("Please select at least one service.");
     }
   };
 
@@ -366,60 +373,71 @@ export default function SignUpPage() {
                 )}
               </div>
             </div>
-
-            <div className="form-control mt-3">
-              {/* GPS Type */}
-              {/* <input
-                type="number"
-                className={`input input-bordered w-full placeholder-white md:flex-1 remove-arrow  ${
-                  registerForm.formState.errors.gps?.type ? "input-error" : ""
-                }`}
-                {...registerForm.register(`gps${index}.0`, 
-                  {
-                      required: "Longitude value is required",
-                      min: {
-                        value: -180,
-                        message:
-                          "Longitude value should not be less than -180 deg",
-                      },
-                      max: {
-                        value: 180,
-                        message:
-                          "Longitude value should not be grater than 180 deg",
-                      },
-                    })}
-                    placeholder={`Longitude ${index + 1}`}
-                    min={-180}
-                    max={180}
-                }               placeholder="GPS Type"
-              />
-
-              <input
-                type="number"
-                className={`input input-bordered w-full placeholder-white md:flex-1 remove-arrow  ${
-                  registerForm.formState.errors.gps?.type ? "input-error" : ""
-                }`}
-                {...registerForm.register(`gps${index}.1`, 
-                  {
-                      required: "Longitude value is required",
-                      min: {
-                        value: -90,
-                        message:
-                          "Longitude value should not be less than -180 deg",
-                      },
-                      max: {
-                        value: 90,
-                        message:
-                          "Longitude value should not be grater than 180 deg",
-                      },
-                    })}
-                    placeholder={`Longitude ${index + 1}`}
-                    min={-90}
-                    max={90}
-                    placeholder="GPS Type"
-              /> */}
+            <div className="grid grid-cols-2 gap-3">
+              <div className="form-control mt-3">
+                {/* GPS Type */}
+                <input
+                  type="number"
+                  className={`input input-bordered w-full placeholder-white  remove-arrow  ${
+                    registerForm.formState.errors.gps?.[0]?.type
+                      ? "input-error"
+                      : ""
+                  }`}
+                  {...registerForm.register(`gps.0`, {
+                    required: "Longitude value is required",
+                    min: {
+                      value: -180,
+                      message:
+                        "Longitude value should not be less than -180 deg",
+                    },
+                    max: {
+                      value: 180,
+                      message:
+                        "Longitude value should not be grater than 180 deg",
+                    },
+                  })}
+                  placeholder={`Longitude`}
+                  min={-180}
+                  max={180}
+                />
+                {registerForm.formState.errors.gps?.[0]?.type ===
+                  "required" && (
+                  <small className="text-error">
+                    GPS Longitude is required
+                  </small>
+                )}
+              </div>
+              <div className="form-control mt-3">
+                <input
+                  type="number"
+                  className={`input input-bordered w-full placeholder-white  remove-arrow  ${
+                    registerForm.formState.errors.gps?.[1]?.type
+                      ? "input-error"
+                      : ""
+                  }`}
+                  {...registerForm.register(`gps.1`, {
+                    required: "Longitude value is required",
+                    min: {
+                      value: -90,
+                      message:
+                        "Latitude value should not be less than -180 deg",
+                    },
+                    max: {
+                      value: 90,
+                      message:
+                        "Latitude value should not be grater than 180 deg",
+                    },
+                  })}
+                  placeholder={`Latitude`}
+                  min={-90}
+                  max={90}
+                />
+                {registerForm.formState.errors.gps?.[1]?.type ===
+                  "required" && (
+                  <small className="text-error">GPS Latitude is required</small>
+                )}
+              </div>
             </div>
-
             {/* defaultAvailability Open */}
             <div className="grid grid-cols-2 gap-3 ">
               <div className="form-control mt-3">
@@ -531,20 +549,35 @@ export default function SignUpPage() {
             </div>
             {/* hospitalServices */}
             <div className="form-control mt-3">
+              <label htmlFor="services">Hospital Services*</label>
               <div className="dropdown dropdown-hover w-full">
                 <div onClick={dropdown} className="btn m-1 w-full">
-                  {selectItem}
+                  {selectItem.length
+                    ? selectItem.join(", ")
+                    : "Select Hospital Services"}
                 </div>
                 {items && (
                   <ul className="dropdown-content z-10 menu p-2 shadow bg-base-100 rounded-box w-full">
                     {options.map((option) => (
                       <li key={option}>
-                        <a onClick={() => selectingItem(option)}>{option}</a>
+                        <label
+                          htmlFor=""
+                          className="flex items-center cursor-pointer"
+                        >
+                          <input
+                            type="checkbox"
+                            checked={selectItem.includes(option)}
+                            onChange={() => selectingItem(option)}
+                            className="form-checkbox  mr-2"
+                          />
+                          <span>{option}</span>
+                        </label>
                       </li>
                     ))}
                   </ul>
                 )}
               </div>
+              {error && <p className="text-error">{error}</p>}
             </div>
 
             {/* Profile Picture */}
@@ -553,6 +586,7 @@ export default function SignUpPage() {
               <input
                 type="file"
                 id="profile"
+                accept="image/*"
                 className={`file-input file-input-bordered w-full placeholder-white  ${
                   registerForm.formState.errors.profilePicture
                     ? "file-input-error"
@@ -623,6 +657,16 @@ export default function SignUpPage() {
                   {registerForm.formState.errors.description?.message}
                 </small>
               )}
+            </div>
+            <div className="card-action mt-3 text-end">
+              <button
+                type="submit"
+                className="btn btn-secondary ml-auto w-52"
+                disabled={status === "pending"}
+                onClick={handleSubmit}
+              >
+                Submit
+              </button>
             </div>
           </div>
         </form>
