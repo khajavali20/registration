@@ -59,6 +59,8 @@ export default function SignUpPage() {
     },
   });
 
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
   // const location = useFieldArray({
   //   control: registerForm.control,
   //   name: gps[]
@@ -114,6 +116,8 @@ export default function SignUpPage() {
     mutationFn: async (data: IHospital) => {
       try {
         const response = await axios.postForm("/hospitals/register", data);
+        setIsSubmitted(true);
+
         return response.data;
       } catch (error) {
         if (axios.isAxiosError(error)) {
@@ -122,6 +126,10 @@ export default function SignUpPage() {
       }
     },
   });
+
+  if (isSubmitted) {
+    return <p>Registration is submitted successfully!</p>;
+  }
 
   return (
     <div className="grid grid-cols-1 gap-y-4 pt-28">
